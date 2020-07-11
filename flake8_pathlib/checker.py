@@ -132,4 +132,7 @@ call_errors = {
     "os.path.dirname": partial_error(id="P120", message="os.path.dirname found"),
     "os.path.samefile": partial_error(id="P121", message="os.path.samefile found"),
     "os.path.splitext": partial_error(id="P122", message="os.path.splitext found"),
+    "open": partial_error(
+        id="P123", message="open('filename') found, use Path('filename').open() instead"
+    ),
 }
