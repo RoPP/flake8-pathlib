@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "flake8-pathlib"
+version = "0.1.0"
+description = ""
+authors = ["Rodolphe Pelloux-Prayer <rodolphe@damsy.net>"]
+repository = "https://gitlab.com/RoPP/flake8-pathlib"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+flake8 = "^3.8.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+pytest-flake8dir = "^2.2.0"
+black = "^19.10b0"
+mypy = "^0.782"
+ipython = "^7.16.1"
+rope = "^0.17.0"
+flake8-bugbear = "^20.1.4"
+flake8-black = "^0.2.0"
+flake8-formatter-junit-xml = "^0.0.6"
+
+[tool.poetry.plugins."flake8.extension"]
+P = "flake8_pathlib:PathlibChecker"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

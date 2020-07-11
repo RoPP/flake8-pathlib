@@ -1,0 +1,250 @@
+from pytest_flake8dir import Flake8Dir  # type: ignore
+
+
+def test_full_name(flake8dir: Flake8Dir) -> None:
+    flake8dir.make_example_py(
+        """import os
+import os.path
+
+p = "/foo"
+
+a = os.path.abspath(p)
+aa = os.chmod(p)
+aaa = os.mkdir(p)
+os.makedirs(p)
+os.rename(p)
+os.replace(p)
+os.rmdir(p)
+os.remove(p)
+os.unlink(p)
+os.getcwd(p)
+b = os.path.exists(p)
+bb = os.path.expanduser(p)
+bbb = os.path.isdir(p)
+bbbb = os.path.isfile(p)
+bbbbb = os.path.islink(p)
+os.readlink(p)
+os.stat(p)
+os.path.isabs(p)
+os.path.join(p)
+os.path.basename(p)
+os.path.dirname(p)
+os.path.samefile(p)
+os.path.splitext(p)
+    """
+    )
+    result = flake8dir.run_flake8()
+    assert result.out_lines == [
+        "./example.py:6:5: P100 os.path.abspath found",
+        "./example.py:7:6: P101 os.chmod found",
+        "./example.py:8:7: P102 os.mkdir found",
+        "./example.py:9:1: P103 os.makedirs found",
+        "./example.py:10:1: P104 os.rename found",
+        "./example.py:11:1: P105 os.replace found",
+        "./example.py:12:1: P106 os.rmdir found",
+        "./example.py:13:1: P107 os.remove found",
+        "./example.py:14:1: P108 os.unlink found",
+        "./example.py:15:1: P109 os.getcwd found",
+        "./example.py:16:5: P110 os.path.exists found",
+        "./example.py:17:6: P111 os.path.expanduser found",
+        "./example.py:18:7: P112 os.path.isdir found",
+        "./example.py:19:8: P113 os.path.isfile found",
+        "./example.py:20:9: P114 os.path.islink found",
+        "./example.py:21:1: P115 os.readlink found",
+        "./example.py:22:1: P116 os.stat found",
+        "./example.py:23:1: P117 os.path.isabs found",
+        "./example.py:24:1: P118 os.path.join found",
+        "./example.py:25:1: P119 os.path.basename found",
+        "./example.py:26:1: P120 os.path.dirname found",
+        "./example.py:27:1: P121 os.path.samefile found",
+        "./example.py:28:1: P122 os.path.splitext found",
+    ]
+
+
+def test_import_as(flake8dir: Flake8Dir) -> None:
+    flake8dir.make_example_py(
+        """import os as foo
+import os.path as foo_p
+
+p = "/foo"
+
+a = foo_p.abspath(p)
+aa = foo.chmod(p)
+aaa = foo.mkdir(p)
+foo.makedirs(p)
+foo.rename(p)
+foo.replace(p)
+foo.rmdir(p)
+foo.remove(p)
+foo.unlink(p)
+foo.getcwd(p)
+b = foo_p.exists(p)
+bb = foo_p.expanduser(p)
+bbb = foo_p.isdir(p)
+bbbb = foo_p.isfile(p)
+bbbbb = foo_p.islink(p)
+foo.readlink(p)
+foo.stat(p)
+foo_p.isabs(p)
+foo_p.join(p)
+foo_p.basename(p)
+foo_p.dirname(p)
+foo_p.samefile(p)
+foo_p.splitext(p)
+    """
+    )
+    result = flake8dir.run_flake8()
+    assert result.out_lines == [
+        "./example.py:6:5: P100 os.path.abspath found",
+        "./example.py:7:6: P101 os.chmod found",
+        "./example.py:8:7: P102 os.mkdir found",
+        "./example.py:9:1: P103 os.makedirs found",
+        "./example.py:10:1: P104 os.rename found",
+        "./example.py:11:1: P105 os.replace found",
+        "./example.py:12:1: P106 os.rmdir found",
+        "./example.py:13:1: P107 os.remove found",
+        "./example.py:14:1: P108 os.unlink found",
+        "./example.py:15:1: P109 os.getcwd found",
+        "./example.py:16:5: P110 os.path.exists found",
+        "./example.py:17:6: P111 os.path.expanduser found",
+        "./example.py:18:7: P112 os.path.isdir found",
+        "./example.py:19:8: P113 os.path.isfile found",
+        "./example.py:20:9: P114 os.path.islink found",
+        "./example.py:21:1: P115 os.readlink found",
+        "./example.py:22:1: P116 os.stat found",
+        "./example.py:23:1: P117 os.path.isabs found",
+        "./example.py:24:1: P118 os.path.join found",
+        "./example.py:25:1: P119 os.path.basename found",
+        "./example.py:26:1: P120 os.path.dirname found",
+        "./example.py:27:1: P121 os.path.samefile found",
+        "./example.py:28:1: P122 os.path.splitext found",
+    ]
+
+
+def test_from_import(flake8dir: Flake8Dir) -> None:
+    flake8dir.make_example_py(
+        """from os import chmod, mkdir, makedirs, rename, replace, rmdir
+from os import remove, unlink, getcwd, readlink, stat
+from os.path import abspath, exists, expanduser, isdir, isfile, islink
+from os.path import isabs, join, basename, dirname, samefile, splitext
+
+p = "/foo"
+
+a = abspath(p)
+aa = chmod(p)
+aaa = mkdir(p)
+makedirs(p)
+rename(p)
+replace(p)
+rmdir(p)
+remove(p)
+unlink(p)
+getcwd(p)
+b = exists(p)
+bb = expanduser(p)
+bbb = isdir(p)
+bbbb = isfile(p)
+bbbbb = islink(p)
+readlink(p)
+stat(p)
+isabs(p)
+join(p)
+basename(p)
+dirname(p)
+samefile(p)
+splitext(p)
+    """
+    )
+    result = flake8dir.run_flake8()
+    assert result.out_lines == [
+        "./example.py:8:5: P100 os.path.abspath found",
+        "./example.py:9:6: P101 os.chmod found",
+        "./example.py:10:7: P102 os.mkdir found",
+        "./example.py:11:1: P103 os.makedirs found",
+        "./example.py:12:1: P104 os.rename found",
+        "./example.py:13:1: P105 os.replace found",
+        "./example.py:14:1: P106 os.rmdir found",
+        "./example.py:15:1: P107 os.remove found",
+        "./example.py:16:1: P108 os.unlink found",
+        "./example.py:17:1: P109 os.getcwd found",
+        "./example.py:18:5: P110 os.path.exists found",
+        "./example.py:19:6: P111 os.path.expanduser found",
+        "./example.py:20:7: P112 os.path.isdir found",
+        "./example.py:21:8: P113 os.path.isfile found",
+        "./example.py:22:9: P114 os.path.islink found",
+        "./example.py:23:1: P115 os.readlink found",
+        "./example.py:24:1: P116 os.stat found",
+        "./example.py:25:1: P117 os.path.isabs found",
+        "./example.py:26:1: P118 os.path.join found",
+        "./example.py:27:1: P119 os.path.basename found",
+        "./example.py:28:1: P120 os.path.dirname found",
+        "./example.py:29:1: P121 os.path.samefile found",
+        "./example.py:30:1: P122 os.path.splitext found",
+    ]
+
+
+def test_from_import_as(flake8dir: Flake8Dir) -> None:
+    flake8dir.make_example_py(
+        """from os import chmod as xchmod, mkdir as xmkdir
+from os import makedirs as xmakedirs, rename as xrename, replace as xreplace
+from os import rmdir as xrmdir, remove as xremove, unlink as xunlink
+from os import getcwd as xgetcwd, readlink as xreadlink, stat as xstat
+from os.path import abspath as xabspath, exists as xexists
+from os.path import expanduser as xexpanduser, isdir as xisdir
+from os.path import isfile as xisfile, islink as xislink, isabs as xisabs
+from os.path import join as xjoin, basename as xbasename, dirname as xdirname
+from os.path import samefile as xsamefile, splitext as xsplitext
+
+p = "/foo"
+
+a = xabspath(p)
+aa = xchmod(p)
+aaa = xmkdir(p)
+xmakedirs(p)
+xrename(p)
+xreplace(p)
+xrmdir(p)
+xremove(p)
+xunlink(p)
+xgetcwd(p)
+b = xexists(p)
+bb = xexpanduser(p)
+bbb = xisdir(p)
+bbbb = xisfile(p)
+bbbbb = xislink(p)
+xreadlink(p)
+xstat(p)
+xisabs(p)
+xjoin(p)
+xbasename(p)
+xdirname(p)
+xsamefile(p)
+xsplitext(p)
+    """
+    )
+    result = flake8dir.run_flake8()
+    assert result.out_lines == [
+        "./example.py:13:5: P100 os.path.abspath found",
+        "./example.py:14:6: P101 os.chmod found",
+        "./example.py:15:7: P102 os.mkdir found",
+        "./example.py:16:1: P103 os.makedirs found",
+        "./example.py:17:1: P104 os.rename found",
+        "./example.py:18:1: P105 os.replace found",
+        "./example.py:19:1: P106 os.rmdir found",
+        "./example.py:20:1: P107 os.remove found",
+        "./example.py:21:1: P108 os.unlink found",
+        "./example.py:22:1: P109 os.getcwd found",
+        "./example.py:23:5: P110 os.path.exists found",
+        "./example.py:24:6: P111 os.path.expanduser found",
+        "./example.py:25:7: P112 os.path.isdir found",
+        "./example.py:26:8: P113 os.path.isfile found",
+        "./example.py:27:9: P114 os.path.islink found",
+        "./example.py:28:1: P115 os.readlink found",
+        "./example.py:29:1: P116 os.stat found",
+        "./example.py:30:1: P117 os.path.isabs found",
+        "./example.py:31:1: P118 os.path.join found",
+        "./example.py:32:1: P119 os.path.basename found",
+        "./example.py:33:1: P120 os.path.dirname found",
+        "./example.py:34:1: P121 os.path.samefile found",
+        "./example.py:35:1: P122 os.path.splitext found",
+    ]

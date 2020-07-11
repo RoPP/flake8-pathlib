@@ -1,0 +1,50 @@
+image: python:3
+
+stages:
+- lint
+- test
+- build
+- release
+
+before_script:
+- pip install poetry
+- poetry install
+
+flake8:
+  stage: lint
+  script: poetry run flake8 --format junit-xml --output-file rspec.xml
+  artifacts:
+    reports:
+      junit: rspec.xml
+
+mypy:
+  stage: lint
+  script: poetry run mypy --junit-xml rspec.xml .
+  artifacts:
+    reports:
+      junit: rspec.xml
+
+python38:
+  image: python:3.8
+  stage: test
+  script: poetry run pytest --junitxml=rspec.xml
+  artifacts:
+    reports:
+      junit: rspec.xml
+
+build:
+  stage: build
+  script: poetry build
+  artifacts:
+    paths:
+    - dist/
+    expire_in: 1 month
+
+release:
+  stage: release
+  script: poetry publish
+  artifacts:
+    paths:
+    - dist
+  only:
+  - tags
