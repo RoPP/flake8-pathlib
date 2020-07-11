@@ -22,6 +22,7 @@ rope = "^0.17.0"
 flake8-bugbear = "^20.1.4"
 flake8-black = "^0.2.0"
 flake8-formatter-junit-xml = "^0.0.6"
+pytest-sugar = "^0.9.4"
 
 [tool.poetry.plugins."flake8.extension"]
 P = "flake8_pathlib:PathlibChecker"
