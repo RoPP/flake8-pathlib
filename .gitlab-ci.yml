@@ -24,6 +24,22 @@ mypy:
     reports:
       junit: rspec.xml
 
+python36:
+  image: python:3.8
+  stage: test
+  script: poetry run pytest --junitxml=rspec.xml
+  artifacts:
+    reports:
+      junit: rspec.xml
+
+python37:
+  image: python:3.8
+  stage: test
+  script: poetry run pytest --junitxml=rspec.xml
+  artifacts:
+    reports:
+      junit: rspec.xml
+
 python38:
   image: python:3.8
   stage: test

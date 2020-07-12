@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "flake8-pathlib"
 version = "0.1.1"
-description = "A flake8 plugin used to improve use of pathlib module."
+description = "A plugin for flake8 finding use of functions that can be replace by pathlib module."
 license = "MIT"
 authors = ["Rodolphe Pelloux-Prayer <rodolphe@damsy.net>"]
 readme = "README.md"
@@ -9,8 +9,9 @@ repository = "https://gitlab.com/RoPP/flake8-pathlib"
 keywords = ["flake8", "linter", "pathlib"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.6"
 flake8 = "^3.8.3"
+dataclasses = {version = "^0.7", python = "~3.6"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

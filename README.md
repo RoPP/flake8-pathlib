@@ -1,3 +1,3 @@
 # flake8-pathlib
 
-A flake8 plugin used to improve use of pathlib module.
+A plugin for flake8 finding use of functions that can be replace by pathlib module.
