@@ -136,4 +136,7 @@ call_errors = {
         id="PL123",
         message="open('filename') found, use Path('filename').open() instead",
     ),
+    "py.path.local": partial_error(
+        id="PL124", message="py.path.local is in maintenance mode, use pathlib instead"
+    ),
 }
