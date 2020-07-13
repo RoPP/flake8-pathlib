@@ -5,10 +5,10 @@ def test_noqa(flake8dir: Flake8Dir) -> None:
     flake8dir.make_example_py(
         """import os.path
 
-with open("foo") as fd:  # noqa: P123
+with open("foo") as fd:  # noqa: PL123
     print(fd)
 
-os.path.exists("foo")  # noqa: P110
+os.path.exists("foo")  # noqa: PL110
     """
     )
     result = flake8dir.run_flake8()
