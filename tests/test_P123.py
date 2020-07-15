@@ -9,5 +9,5 @@ def test_open(flake8dir: Flake8Dir) -> None:
     )
     result = flake8dir.run_flake8()
     assert result.out_lines == [
-        "./example.py:1:6: PL123 open('filename') found, use Path('filename').open() instead"
+        './example.py:1:6: PL123 open("foo") should be replaced by Path("foo").open()'
     ]
