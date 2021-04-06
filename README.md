@@ -1,18 +1,18 @@
-# flake8-pathlib
+# flake8-use-pathlib
 
-[![pypi][pypi-badge]](https://pypi.org/project/flake8-pathlib/)
+[![pypi][pypi-badge]](https://pypi.org/project/flake8-use-pathlib/)
 [![black][black-badge]](https://github.com/psf/black)
 
 A plugin for flake8 finding use of functions that can be replaced by pathlib module.
 
-[pypi-badge]: https://badgen.net/pypi/v/flake8-pathlib
+[pypi-badge]: https://badgen.net/pypi/v/flake8-use-pathlib
 [black-badge]: https://badgen.net/badge/code%20style/black/black/
 
 ## Installation
 
 Install from `pip` with:
 
-`pip install flake8-pathlib`
+`pip install flake8-use-pathlib`
 
 ## Rules
 

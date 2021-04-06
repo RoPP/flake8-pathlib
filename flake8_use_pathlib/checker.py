@@ -5,7 +5,7 @@ import functools
 
 import pkg_resources
 
-pkg_name = "flake8-pathlib"
+pkg_name = "flake8-use-pathlib"
 pkg_version = pkg_resources.get_distribution(pkg_name).version
 
 

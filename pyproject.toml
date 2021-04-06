@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "flake8-pathlib"
-version = "0.1.3"
+name = "flake8-use-pathlib"
+version = "0.2.0"
 description = "A plugin for flake8 finding use of functions that can be replaced by pathlib module."
 license = "MIT"
 authors = ["Rodolphe Pelloux-Prayer <rodolphe@damsy.net>"]
 readme = "README.md"
-repository = "https://gitlab.com/RoPP/flake8-pathlib"
+repository = "https://gitlab.com/RoPP/flake8-use-pathlib"
 keywords = ["flake8", "linter", "pathlib"]
 
 [tool.poetry.dependencies]
@@ -26,7 +26,7 @@ flake8-formatter-junit-xml = "^0.0.6"
 pytest-sugar = "^0.9.4"
 
 [tool.poetry.plugins."flake8.extension"]
-PL = "flake8_pathlib:PathlibChecker"
+PL = "flake8_use_pathlib:PathlibChecker"
 
 [build-system]
 requires = ["poetry>=0.12"]
