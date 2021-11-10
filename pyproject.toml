@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "flake8-use-pathlib"
-version = "0.2.0"
+version = "0.2.1"
 description = "A plugin for flake8 finding use of functions that can be replaced by pathlib module."
 license = "MIT"
 authors = ["Rodolphe Pelloux-Prayer <rodolphe@damsy.net>"]
