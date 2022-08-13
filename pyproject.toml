@@ -10,7 +10,7 @@ keywords = ["flake8", "linter", "pathlib"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
-flake8 = ">=3.6, <5"
+flake8 = ">=3.6"
 dataclasses = {version = "^0.7", python = "~3.6"}
 
 [tool.poetry.dev-dependencies]
