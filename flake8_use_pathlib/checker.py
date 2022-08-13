@@ -197,7 +197,8 @@ call_errors = {
         message='os.path.splitext("foo.bar") should be replaced by foo_path.suffix',
     ),
     "open": partial_error(
-        id="PL123", message='open("foo") should be replaced by Path("foo").open()',
+        id="PL123",
+        message='open("foo") should be replaced by Path("foo").open()',
     ),
     "py.path.local": partial_error(
         id="PL124", message="py.path.local is in maintenance mode, use pathlib instead"
