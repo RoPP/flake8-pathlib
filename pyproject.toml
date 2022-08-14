@@ -14,15 +14,16 @@ flake8 = ">=3.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
-mypy = "^0.782"
+mypy = "^0.971"
 ipython = "^7.16.1"
 rope = "^0.17.0"
-flake8-bugbear = "^20.1.4"
+flake8-bugbear = "^22.7.1"
 flake8-formatter-junit-xml = "^0.0.6"
-pytest-sugar = "^0.9.4"
+pytest-sugar = "^0.9.5"
 black = "^22.6.0"
 flake8-black = "^0.3.3"
 pytest-flake8-path = "^1.3.0"
+types-setuptools = "^64.0.1"
 
 [tool.poetry.plugins."flake8.extension"]
 PL = "flake8_use_pathlib:PathlibChecker"
