@@ -1,14 +1,14 @@
 image: python:3
 
 stages:
-- lint
-- test
-- build
-- release
+  - lint
+  - test
+  - build
+  - release
 
 before_script:
-- pip install poetry
-- poetry install
+  - pip install poetry
+  - poetry install
 
 flake8:
   stage: lint
@@ -40,12 +40,28 @@ python38:
     reports:
       junit: rspec.xml
 
+python39:
+  image: python:3.9
+  stage: test
+  script: poetry run pytest --junitxml=rspec.xml
+  artifacts:
+    reports:
+      junit: rspec.xml
+
+python310:
+  image: python:3.10
+  stage: test
+  script: poetry run pytest --junitxml=rspec.xml
+  artifacts:
+    reports:
+      junit: rspec.xml
+
 build:
   stage: build
   script: poetry build
   artifacts:
     paths:
-    - dist/
+      - dist/
     expire_in: 1 month
 
 release:
@@ -53,6 +69,6 @@ release:
   script: poetry publish
   artifacts:
     paths:
-    - dist
+      - dist
   only:
-  - tags
+    - tags
