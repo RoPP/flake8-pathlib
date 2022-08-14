@@ -1,8 +1,8 @@
-from pytest_flake8dir import Flake8Dir  # type: ignore
+from pytest_flake8_path import Flake8Path
 
 
-def test_full_name(flake8dir: Flake8Dir) -> None:
-    flake8dir.make_example_py(
+def test_full_name(flake8_path: Flake8Path) -> None:
+    (flake8_path / "example.py").write_text(
         """import os
 import os.path
 
@@ -31,9 +31,9 @@ os.path.basename(p)
 os.path.dirname(p)
 os.path.samefile(p)
 os.path.splitext(p)
-    """
+"""
     )
-    result = flake8dir.run_flake8()
+    result = flake8_path.run_flake8()
     assert result.out_lines == [
         './example.py:6:5: PL100 os.path.abspath("foo") should be replaced by foo_path.resolve()',
         './example.py:7:6: PL101 os.chmod("foo", 0o444) should be replaced by foo_path.chmod(0o444)',
@@ -62,8 +62,8 @@ os.path.splitext(p)
     ]
 
 
-def test_import_as(flake8dir: Flake8Dir) -> None:
-    flake8dir.make_example_py(
+def test_import_as(flake8_path: Flake8Path) -> None:
+    (flake8_path / "example.py").write_text(
         """import os as foo
 import os.path as foo_p
 
@@ -92,9 +92,9 @@ foo_p.basename(p)
 foo_p.dirname(p)
 foo_p.samefile(p)
 foo_p.splitext(p)
-    """
+"""
     )
-    result = flake8dir.run_flake8()
+    result = flake8_path.run_flake8()
     assert result.out_lines == [
         './example.py:6:5: PL100 os.path.abspath("foo") should be replaced by foo_path.resolve()',
         './example.py:7:6: PL101 os.chmod("foo", 0o444) should be replaced by foo_path.chmod(0o444)',
@@ -123,8 +123,8 @@ foo_p.splitext(p)
     ]
 
 
-def test_from_import(flake8dir: Flake8Dir) -> None:
-    flake8dir.make_example_py(
+def test_from_import(flake8_path: Flake8Path) -> None:
+    (flake8_path / "example.py").write_text(
         """from os import chmod, mkdir, makedirs, rename, replace, rmdir
 from os import remove, unlink, getcwd, readlink, stat
 from os.path import abspath, exists, expanduser, isdir, isfile, islink
@@ -155,9 +155,9 @@ basename(p)
 dirname(p)
 samefile(p)
 splitext(p)
-    """
+"""
     )
-    result = flake8dir.run_flake8()
+    result = flake8_path.run_flake8()
     assert result.out_lines == [
         './example.py:8:5: PL100 os.path.abspath("foo") should be replaced by foo_path.resolve()',
         './example.py:9:6: PL101 os.chmod("foo", 0o444) should be replaced by foo_path.chmod(0o444)',
@@ -186,8 +186,8 @@ splitext(p)
     ]
 
 
-def test_from_import_as(flake8dir: Flake8Dir) -> None:
-    flake8dir.make_example_py(
+def test_from_import_as(flake8_path: Flake8Path) -> None:
+    (flake8_path / "example.py").write_text(
         """from os import chmod as xchmod, mkdir as xmkdir
 from os import makedirs as xmakedirs, rename as xrename, replace as xreplace
 from os import rmdir as xrmdir, remove as xremove, unlink as xunlink
@@ -223,9 +223,9 @@ xbasename(p)
 xdirname(p)
 xsamefile(p)
 xsplitext(p)
-    """
+"""
     )
-    result = flake8dir.run_flake8()
+    result = flake8_path.run_flake8()
     assert result.out_lines == [
         './example.py:13:5: PL100 os.path.abspath("foo") should be replaced by foo_path.resolve()',
         './example.py:14:6: PL101 os.chmod("foo", 0o444) should be replaced by foo_path.chmod(0o444)',
